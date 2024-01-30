@@ -72,7 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Features
 -Login/signup page
-  - Sign In/sign up form
+  - Sign In/sign up form (Formik for forms)
   - redirect to browse page
 -Browse (after authentication)
   - Header
@@ -84,3 +84,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 -Netflix GPT
    - Search bar
    - Movie suggestions     
+-Authentication support
