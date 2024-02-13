@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { NETFLIX_BG_IMG } from "../utils/constants";
+import { NETFLIX_BG_IMG, NETFLIX_LOGO_IMG } from "../utils/constants";
 import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -8,7 +8,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
@@ -16,7 +15,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isSignedInForm, setSignedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const onToggleSignIn = () => {
     isSignedInForm ? setSignedIn(false) : setSignedIn(true);
@@ -28,7 +26,6 @@ const Login = () => {
 
   const authenticationLogic = () => {
     if (!isSignedInForm) {
-      console.log("Signed");
       createUserWithEmailAndPassword(
         auth,
         email.current?.value as string,
@@ -37,12 +34,11 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
 
           user &&
             updateProfile(user, {
               displayName: displayName.current?.value,
-              photoURL: "",
+              photoURL: NETFLIX_LOGO_IMG,
             })
               .then(() => {
                 // Profile updated!
@@ -55,7 +51,6 @@ const Login = () => {
                     photoURL: photoURL,
                   })
                 );
-                navigate("/browse");
               })
               .catch((error) => {
                 const errorMessage = error.message;
@@ -75,7 +70,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorMessage = error.message;

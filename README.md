@@ -83,5 +83,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
      - Movie lists 
 -Netflix GPT
    - Search bar
-   - Movie suggestions     
--Authentication support
+   - Movie suggestions     (TMDB API)
+-Authentication support using firebase
+-Created redux store with diffrent slice
+-Navigation update inside authentication update only
+-Hygience practice  - unsubscribe authentication update
+-Show video bg and movie list
+-Introduce GPT search and give language support using context
