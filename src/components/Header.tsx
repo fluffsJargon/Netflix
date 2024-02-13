@@ -1,5 +1,9 @@
-import React, { useEffect } from "react";
-import { NETFLIX_LOGO_IMG, SIGNOUT_LOGO } from "../utils/constants";
+import React, { EventHandler, useContext, useEffect } from "react";
+import {
+  LANGUAGEOPTIONS,
+  NETFLIX_LOGO_IMG,
+  SIGNOUT_LOGO,
+} from "../utils/constants";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../utils/appStore";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGPTSearchBar } from "../utils/gptSearchSlice";
+import { UserLanguageContext } from "../utils/UserLanguageContext";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.user);
+  const gptSearch = useSelector(
+    (store: RootState) => store.gptSearch.searchToggle
+  );
+
   const dispatch = useDispatch();
+  const currentLanguage = useContext(UserLanguageContext);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -24,6 +34,10 @@ const Header = () => {
   };
 
   const handleGPTToggle = () => dispatch(toggleGPTSearchBar());
+
+  const handleLanguageSelection = (e: any) => {
+    currentLanguage.setLanguage(e.target.value);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -48,9 +62,25 @@ const Header = () => {
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between">
       <img className="w-44" src={NETFLIX_LOGO_IMG} alt="logo" />
+
       {user && (
         <div className="flex justify-between align-middle">
-          <button className="bg-purple-800 text-white h-3/4 mr-4 mt-2 px-2 border-white rounded-lg" onClick={handleGPTToggle}>
+          {gptSearch && (
+            <select
+              className=" bg-gray-800 text-white p-2 h-3/4 mt-2 rounded-lg"
+              onChange={handleLanguageSelection}
+            >
+              {LANGUAGEOPTIONS.map((lang) => (
+                <option value={lang.identifier} key={lang.identifier}>
+                  {lang.lang}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            className="bg-purple-800 text-white h-3/4 mx-4 mt-2 px-2 border-white rounded-lg"
+            onClick={handleGPTToggle}
+          >
             <span className="w-22 text-white bold">Netflix GPT</span>
           </button>
           <button onClick={handleSignOut}>
