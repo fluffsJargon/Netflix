@@ -4,7 +4,6 @@ import message from '../utils/i18Messages';
 
 export default function GPTSearchBar() {
   const language = useContext(UserLanguageContext);
-  console.log(language.language)
   const langKey = language.language;
   return (
     <div className='pt-[35%] md:pt-[10%] flex justify-center'>
