@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import PrimaryContainer from "./PrimaryContainer";
@@ -10,6 +10,7 @@ import { UserLanguageContext } from "../utils/UserLanguageContext";
 import { Locale } from "../utils/i18Messages";
 
 const Browse = () => {
+
   const [lang, setLang] = useState('en');
 
   const defaultLanguageContext = {language:lang as Locale, setLanguage: setLang};

@@ -12,4 +12,4 @@ export const NOWPLAYING_API_OPTIONS = {
 
   export const IMG_CDN_URL = "https://image.tmdb.org/t/p/original";
 
-  export const LANGUAGEOPTIONS = [{identifier:"en", lang:"English"}, {identifier:"hindi", lang:"Hindi"}, {identifier:"spanish", lang:"spanish"}]
+  export const LANGUAGEOPTIONS = [{identifier:"en", lang:"English"}, {identifier:"hindi", lang:"Hindi"}, {identifier:"spanish", lang:"Spanish"}]

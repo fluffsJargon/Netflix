@@ -1,4 +1,4 @@
-import React, { EventHandler, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   LANGUAGEOPTIONS,
   NETFLIX_LOGO_IMG,
@@ -81,7 +81,9 @@ const Header = () => {
             className="bg-purple-800 text-white h-3/4 mx-4 mt-2 px-2 border-white rounded-lg"
             onClick={handleGPTToggle}
           >
-            <span className="w-22 text-white bold">Netflix GPT</span>
+            <span className="w-22 text-white bold">
+              {gptSearch ? "Home" : "Netflix GPT"}
+            </span>
           </button>
           <button onClick={handleSignOut}>
             <img className="w-22" src={SIGNOUT_LOGO} alt="signoutlogo" />
